@@ -1,29 +1,692 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treazo - Taschengeld einfach verwalten</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Treazo – Familienfinanzen einfach verwalten</title>
+    <meta
+      name="description"
+      content="Treazo ist die smarte Finanz-App für Familien. Automatisiere Taschengeld, verwalte Aufgaben und Sparziele und sorge für einen entspannten Alltag."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            boxShadow: {
+              soft: '0 18px 60px rgba(15, 100, 120, 0.12)',
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
     <style>
-        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #2Dbed2; color: white; text-align: center; }
-        .container { padding: 20px; }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; letter-spacing: -1px; }
-        p { font-size: 1.2rem; opacity: 0.9; max-width: 400px; margin: 0 auto 30px auto; }
-        .nav { margin-top: 40px; }
-        .nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.9rem; opacity: 0.8; border-bottom: 1px solid transparent; transition: opacity 0.3s; }
-        .nav a:hover { opacity: 1; border-bottom: 1px solid white; }
-        .badge { background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 20px; }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      ::selection {
+        background: rgba(250, 200, 40, 0.2);
+      }
+      details > summary {
+        list-style: none;
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+      .mockup-inner img, .mockup-inner video {
+        -webkit-user-drag: none;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="badge">Demnächst im App Store</div>
-        <h1>Treazo</h1>
-        <p>Die moderne Art, Taschengeld innerhalb der Familie spielerisch und einfach zu verwalten.</p>
-        <div class="nav">
-            <a href="privacy.html">Impressum & Datenschutz</a>
-            <a href="support.html">Support</a>
+  </head>
+  <body class="bg-white text-slate-900 antialiased">
+    
+    <!-- HEADER -->
+    <header class="border-b border-slate-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:px-8">
+        <a href="#hero" class="flex items-center gap-3 text-slate-900">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FAC828]/10 text-[#FAC828] shadow-sm">
+            <span class="text-lg font-semibold">T</span>
+          </div>
+          <span class="text-lg font-semibold tracking-tight">Treazo</span>
+        </a>
+        <nav class="hidden items-center gap-8 md:flex text-sm font-medium text-slate-700">
+          <a href="#benefits" class="hover:text-[#2DBED2] transition-colors">Funktionen</a>
+          <a href="#video-section" class="hover:text-[#2DBED2] transition-colors">App-Video</a>
+          <a href="#story" class="hover:text-[#2DBED2] transition-colors">Unsere Story</a>
+          <a href="#faq" class="hover:text-[#2DBED2] transition-colors">FAQ</a>
+        </nav>
+        <a
+          href="https://apps.apple.com/us/app/treazo/id6762342944"
+          target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center rounded-full bg-[#FAC828] px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-[#e0b323]"
+          >Im App Store laden</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO SECTION -->
+      <section id="hero" class="overflow-hidden bg-gradient-to-br from-[#50D2E6] to-[#0F6478] text-white">
+        <div class="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:flex lg:items-center lg:justify-between lg:py-24">
+          <div class="max-w-2xl lg:max-w-xl">
+            <p class="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.24em] text-white/90">
+              Nie wieder Taschengeld vergessen
+            </p>
+            <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Taschengeld. <br />Smarter. Einfacher.
+            </h1>
+            <p class="mt-6 max-w-xl text-base leading-8 text-white/90 sm:text-lg">
+              Die Familien-App, die mitwächst. Automatisiere das Taschengeld, organisiere Alltagsaufgaben und gib deinem Kind einen sicheren, digitalen Raum, um den Wert von Geld zu lernen. Spürbare Entlastung für deinen Alltag.
+            </p>
+            <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="https://apps.apple.com/us/app/treazo/id6762342944"
+                target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <span class="mr-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2DBED2]/15 text-[#2DBED2]">
+                  <i data-lucide="apple" class="h-4 w-4"></i>
+                </span>
+                Im App Store laden
+              </a>
+              <a
+                href="#kontakt"
+                class="inline-flex items-center justify-center rounded-full bg-[#FAC828] px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-[#e0b323]"
+              >
+                14 Tage unverbindlich testen
+              </a>
+            </div>
+            <p class="mt-3 text-sm text-white/70 ml-2">* Danach nur 29,99 € / Jahr. Jederzeit kündbar.</p>
+          </div>
+
+          <!-- ÜBERLAPPENDE HANDYS -->
+          <div class="mt-16 lg:mt-0 lg:w-[500px] w-full relative z-10 flex justify-center lg:justify-end">
+            <div class="relative w-full max-w-[450px] h-[500px] sm:h-[600px]">
+              
+              <!-- Hinteres Handy: ELTERN-ANSICHT -->
+              <div class="absolute top-12 left-0 w-[60%] sm:w-[65%] -rotate-6 rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-2xl opacity-90 transition-transform duration-500 hover:rotate-0 hover:-translate-y-2 z-0">
+                <div class="absolute -top-4 -left-4 bg-[#2DBED2] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-20">
+                  Eltern-Ansicht
+                </div>
+                <div class="mockup-inner overflow-hidden rounded-[1.8rem] bg-black">
+                  <img
+                    src="assets/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-04-28%20at%2010.14.53.png"
+                    alt="Treazo App Eltern-Ansicht"
+                    class="h-auto w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <!-- Vorderes Handy: KINDER-ANSICHT -->
+              <div class="absolute top-0 right-0 w-[65%] sm:w-[70%] rotate-3 rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:rotate-0 hover:-translate-y-2 z-10">
+                <div class="absolute -top-4 -right-2 bg-[#FAC828] text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg z-20">
+                  Kinder-Ansicht
+                </div>
+                <div class="mockup-inner overflow-hidden rounded-[1.8rem] bg-black">
+                  <img
+                    src="assets/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-04-28%20at%2010.08.30.png"
+                    alt="Treazo App Kinder-Ansicht"
+                    class="h-auto w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <!-- Dekorativer Hintergrund-Glow -->
+              <div class="absolute top-1/2 left-1/2 -z-10 h-[100%] w-[100%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl"></div>
+            </div>
+          </div>
         </div>
-    </div>
-</body>
+      </section>
+
+      <!-- ERWEITERTE BENEFITS SECTION -->
+      <section id="benefits" class="mx-auto max-w-7xl px-6 py-20 sm:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[#2DBED2]">Darum Treazo</p>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            Mehr als nur Taschengeld
+          </h2>
+          <p class="mt-4 text-slate-600">
+            Entwickelt, um den Alltag von Familien und Alleinerziehenden zu entlasten. Treazo bringt Struktur rein – für dich und deine Kinder.
+          </p>
+        </div>
+        
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-[#2DBED2]/10 text-[#2DBED2]">
+              <i data-lucide="calendar-clock" class="h-6 w-6"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-900">Taschengeld-Autopilot</h3>
+            <p class="mt-4 text-slate-600">Nie wieder den Zahltag vergessen. Das System bucht das Guthaben vollautomatisch. Wenn du im Laden etwas vorstreckst, kannst du es direkt und transparent in der App wieder abziehen.</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-[#FAC828]/10 text-[#FAC828]">
+              <i data-lucide="list-todo" class="h-6 w-6"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-900">Aufgaben & Routinen</h3>
+            <p class="mt-4 text-slate-600">Verknüpfe extra Geld mit Gartenarbeit oder nutze unbezahlte Checklisten für tägliche Routinen. Das gibt Kindern visuelle Orientierung und dir das ständige "Hast du schon...?" erspart.</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-slate-900/10 text-slate-900">
+              <i data-lucide="target" class="h-6 w-6"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-900">Sparziele visualisieren</h3>
+            <p class="mt-4 text-slate-600">Ein teurer Wunsch? Kinder können Sparziele anlegen und sehen live ihren Fortschritt. So lernen sie greifbar, wie Sparen funktioniert, anstatt das Geld sofort auszugeben.</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-[#FAC828]/10 text-[#FAC828]">
+              <i data-lucide="gift" class="h-6 w-6"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-900">Der smarte Wunschzettel</h3>
+            <p class="mt-4 text-slate-600">Wünsche werden in der App gesammelt. Du kannst unsichtbar für das Kind markieren, ob es das Geschenk zu Weihnachten gibt oder ob die Oma es schon besorgt hat.</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-slate-900/10 text-slate-900">
+              <i data-lucide="banknote" class="h-6 w-6"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-900">Vorschüsse & flexibles Taschengeld</h3>
+            <p class="mt-4 text-slate-600">Das Geld reicht nicht ganz für einen Wunsch? Du kannst ganz unkompliziert das Taschengeld vorziehen und in der App eine flexible Rückzahlung festlegen. So lernen Kinder früh, mit ihrem Budget umzugehen.</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-[#2DBED2]/10 text-[#2DBED2]">
+              <i data-lucide="trending-up" class="h-6 w-6"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-900">Gesamtübersicht (Rücklagen & Co.)</h3>
+            <p class="mt-4 text-slate-600">Das Geld der Kinder liegt oft verstreut: Sparbuch hier, Depot da. Treazo bietet dir eine zentrale Übersicht, um die Rücklagen deiner Kinder sicher und übersichtlich im Blick zu behalten.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- VIDEO SECTION -->
+      <section id="video-section" class="bg-slate-900 px-6 py-20 sm:px-8 text-white mt-8 mb-16 rounded-[3rem] mx-auto max-w-7xl shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[500px] h-[500px] bg-[#2DBED2] opacity-20 rounded-full blur-[100px]"></div>
+
+        <div class="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div class="lg:w-1/2">
+            <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[#2DBED2]">Jetzt verfügbar</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">Ein erster Blick auf Treazo</h2>
+            <p class="mt-6 text-base leading-relaxed text-slate-300">
+              Modernes Design, klare Strukturen und perfekt auf den Familienalltag abgestimmt. Hol dir die App auf dein Smartphone und entdecke eine Oberfläche, die sowohl dir als auch deinem Kind Spaß macht.
+            </p>
+            <div class="mt-8">
+              <a href="https://apps.apple.com/us/app/treazo/id6762342944" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100">
+                <i data-lucide="apple" class="h-5 w-5 mr-2"></i> Direkt zum App Store
+              </a>
+            </div>
+          </div>
+          
+          <div class="lg:w-1/2 flex justify-center">
+            <div class="relative w-full max-w-[280px] overflow-hidden rounded-[2.5rem] border-[8px] border-black bg-black shadow-2xl transform transition hover:-translate-y-2 duration-500">
+              <video src="assets/Treazo%20(Neue%20iOS-App).mp4" autoplay loop muted playsinline class="h-auto w-full object-cover rounded-[1.8rem]"></video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STORY / ENTWICKLERGESCHICHTE -->
+      <section id="story" class="mx-auto max-w-4xl px-6 pb-20 sm:px-8">
+        <div class="rounded-[3rem] bg-slate-50 p-8 sm:p-12 lg:p-16 border border-slate-100 shadow-sm">
+          <div class="text-center mb-10">
+            <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[#2DBED2]">Die Geschichte hinter Treazo</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl leading-tight">„Mama, wann bekomme ich endlich wieder mein Taschengeld?“</h2>
+          </div>
+          
+          <div class="space-y-6 text-lg leading-relaxed text-slate-600">
+            <p>
+              Die Idee zu Treazo entstand aus dem ganz normalen Chaos meines eigenen Alltags. Als alleinerziehende Mutter kenne ich das Gefühl der ständigen Überlastung nur zu gut. Es passierte ständig: Ich hatte im Trubel schlichtweg vergessen, das wöchentliche Taschengeld auszuzahlen, hatte kein passendes Kleingeld parat oder habe es auf später verschoben – und dann doch nie gemacht.
+            </p>
+            <p>
+              Als meine Tochter mich eines Tages genervt fragte, wann sie denn endlich wieder ihr Taschengeld bekäme, wusste ich, dass sich etwas ändern muss. Das Problem war nämlich auch: Wir wussten beide oft gar nicht mehr genau, wie viel Geld sie eigentlich noch besaß. Das Bargeld lag lose im Zimmer herum und verschwand auf unerklärliche Weise. Wenn wir unterwegs waren und sie sich eine Kleinigkeit kaufen wollte, hatte sie ihr Geld natürlich nicht dabei. Also habe ich es vorgestreckt – und im Alltagsstress prompt vergessen, es zu Hause wieder von ihr einzufordern. So konnte sie natürlich überhaupt nicht lernen, wirklich mit ihrem eigenen Budget zu haushalten.
+            </p>
+            <p>
+              Auf der Suche nach einer digitalen Lösung probierte ich viele Apps aus, aber keine hat mich überzeugt. Mir fehlte vor allem eine entscheidende Sache: Die Verknüpfung mit den täglichen Aufgaben. Kinder vergessen ihre Aufgaben ständig, und wir Eltern müssen permanent daran erinnern. 
+            </p>
+            <p>
+              Deshalb habe ich in Treazo ein klares Aufgaben-System integriert. Das können bezahlte Sonderaufgaben sein, aber eben auch völlig unentgeltliche Alltagsroutinen. Viele Familien schätzen dabei besonders die klare visuelle Struktur und feste Routinen – eine Übersicht zum Abhaken, die Orientierung und Halt im Alltag gibt.
+            </p>
+            <p class="font-medium text-slate-800">
+              Treazo gibt den Kindern Sicherheit und Selbstständigkeit, und uns Eltern nimmt es das ständige Mitdenken ab. Endlich wird der Alltag für alle ein bisschen entlastet.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA / TRIAL SECTION -->
+      <section class="bg-[#2DBED2] px-6 py-12 text-white sm:px-8">
+        <div class="mx-auto max-w-7xl rounded-[2rem] border border-white/15 bg-white/5 px-8 py-10 shadow-soft sm:px-12">
+          <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div class="max-w-2xl">
+              <p class="text-sm font-semibold uppercase tracking-[0.3em] text-white/80">Jetzt ausprobieren</p>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">14 Tage unverbindlich testen</h2>
+              <p class="mt-4 max-w-2xl text-base leading-8 text-white/90">
+                Lade dir Treazo herunter und teste alle Premium-Funktionen 14 Tage lang kostenlos (beim Abschluss eines Jahresabos für nur 29,99 €/Jahr).<br><br>
+                <strong>Exklusiver Tester-Club:</strong> Registriere dich über das Formular unten und werde Mitglied in unserem Tester-Club. Damit sicherst du dir 1 komplettes Jahr Treazo kostenfrei!
+              </p>
+            </div>
+            <a
+              href="#kontakt"
+              class="inline-flex shrink-0 items-center justify-center rounded-full bg-[#FAC828] px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-[#e0b323]"
+            >
+              Zum Tester-Club Formular
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREENSHOT SECTION -->
+      <section class="mx-auto max-w-7xl px-6 py-20 sm:px-8">
+        <div class="text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[#2DBED2]">App-Einblicke</p>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Ein klarer Blick auf Treazo</h2>
+        </div>
+        
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center">
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%203.png" alt="Treazo App Screenshot 3" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%204.png" alt="Treazo App Screenshot 4" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%205.png" alt="Treazo App Screenshot 5" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%206.png" alt="Treazo App Screenshot 6" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%207.png" alt="Treazo App Screenshot 7" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%208.png" alt="Treazo App Screenshot 8" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%209.png" alt="Treazo App Screenshot 9" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+          <div class="group relative w-full max-w-[260px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-slate-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="assets/Apple%20iPhone%2016%20Pro%20Max%20Screenshot%2010.png" alt="Treazo App Screenshot 10" class="h-auto w-full rounded-[1.8rem] object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ SECTION MIT LIVE-SUCHE -->
+      <section id="faq" class="bg-slate-50 px-6 py-20 sm:px-8">
+        <div class="mx-auto max-w-4xl">
+          <div class="text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[#2DBED2]">FAQ & Support</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Häufige Fragen</h2>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600 mx-auto">
+              Alles Wichtige zur App – nutze einfach die Suche, um direkt zur passenden Antwort zu gelangen.
+            </p>
+          </div>
+
+          <div class="relative max-w-xl mx-auto mt-10 mb-8">
+            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="search" class="h-5 w-5"></i>
+            </div>
+            <input 
+              type="text" 
+              id="faq-search" 
+              class="w-full rounded-full border border-slate-200 bg-white py-4 pl-12 pr-4 text-slate-900 outline-none transition focus:border-[#2DBED2] focus:ring-2 focus:ring-[#2DBED2]/20 shadow-sm" 
+              placeholder="Suche nach einem Stichwort (z.B. Alter, Apple, Aufgabe...)"
+            >
+          </div>
+
+          <div class="flex flex-col gap-4" id="faq-list">
+            
+            <!-- NEUE FAQS ZUR TECHNIK UND ZIELGRUPPE -->
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Für welches Alter ist Treazo geeignet?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Treazo wächst mit! Es eignet sich ab dem ersten Taschengeld (ca. 5 bis 6 Jahre) bis weit ins Teenageralter. Die Funktionen können je nach Alter und Reife des Kindes flexibel ein- und ausgeschaltet werden.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Braucht mein Kind ein eigenes Handy?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Nein, nicht zwingend. Ihr könnt die Kinder-Ansicht jederzeit gemeinsam auf deinem Handy öffnen. Wenn dein Kind bereits ein eigenes Gerät (z.B. ein iPad oder ein erstes iPhone) besitzt, kann es sich aber auch dort mit seinem Profil einloggen.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Ist das echtes Geld oder eine Bankanbindung?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Treazo ist zu 100 % sicher, da wir keine echte Bankanbindung nutzen. Die App verwaltet virtuelles „Familienguthaben“. Du als Elternteil behältst das echte Geld sicher bei dir, während die App wie ein smartes, digitales Haushaltsbuch darüber Buch führt.</p>
+              </div>
+            </details>
+
+            <!-- BESTEHENDE FAQS -->
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Kinder-Handy verbinden</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Um das Handy eines Kindes zu verbinden:<br><br>1. Gehe auf deinem Handy in die Einstellungen (Zahnrad ⚙️).<br>2. Lege dort ein 'Geräte-Passwort' fest.<br>3. Öffne die App beim Kind, tippe auf 'Gerät freischalten' und gib deine E-Mail und dieses neue Passwort ein.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Warum ist meine Apple E-Mail so komisch?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Das ist die 'E-Mail-Adresse verbergen'-Funktion von Apple zum Schutz deiner Privatsphäre! Treazo sieht deine echte E-Mail nicht. <strong>WICHTIG:</strong> Wenn du ein Kinder-Handy verbindest, musst du dort exakt diese kryptische E-Mail (z.B. ...@privaterelay.appleid.com) eingeben!</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Passwort (Erwachsene & Kind) ändern</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Die PIN eines Kindes kannst du jederzeit im Dashboard ändern, indem du auf das kleine Stift-Symbol ✏️ neben dem Namen des Kindes tippst.<br><br>Dein eigenes Passwort als Erwachsene*r änderst du in deinen App-Einstellungen (Zahnrad oben rechts).</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Weitere erwachsene Person einladen</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Gehe auf dem Startbildschirm auf 'Erwachsenen einladen'. Dort findest du euren Familien-Code. Die andere Person lädt sich die App herunter, wählt beim Start 'Mit Code beitreten' und gibt diesen Code zusammen mit ihrer eigenen E-Mail ein.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Wie lösche / bearbeite ich Einträge?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Es gibt in der App zwei Wege:<br>1. Manchmal siehst du ein kleines Stift-Symbol ✏️ zum direkten Bearbeiten.<br>2. In Listen (z.B. bei Aufgaben, Daueraufträgen oder dem Wunschzettel) wischst du einen Eintrag einfach nach links (Swipe). Dann tauchen die Knöpfe zum Löschen 🗑️ oder Bearbeiten auf!</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Wie funktionieren Aufgaben?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Aktiviere die Funktion 'Aufgaben' im Profil des Kindes. Dann kannst du Aufgaben erstellen. Das Kind hakt sie auf seinem Handy ab, und du bestätigst sie danach auf deinem Dashboard unter 'Warten auf Bestätigung'.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Aufgaben ohne Geld (Haushalt)</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Lass das Feld für den Betrag einfach leer oder trage '0' ein. Dann wird kein Geld-Symbol angezeigt und die Aufgabe funktioniert wie eine ganz normale, alltägliche Erinnerung (z.B. 'Zähne putzen' oder 'Hausaufgaben').</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Feste vs. Flexible Aufgaben</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Feste Aufgaben erscheinen für das Kind erst an dem gewählten Tag (z.B. jeden Montag ab 0:00 Uhr). Flexible Aufgaben (z.B. '1x pro Woche') starten ihren Rhythmus erst neu, sobald das Kind sie erledigt hat.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Benachrichtigungen (Push)</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Wenn du beim Start der App Benachrichtigungen erlaubt hast, sagt dir Treazo automatisch Bescheid, sobald dein Kind eine Aufgabe als erledigt markiert hat! (Beachte: Das Kind muss dafür online sein).</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Dauerauftrag anlegen</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Daueraufträge richtest du im Eltern-Dashboard ein. Tippe auf die Karte deines Kindes und dann auf den lila Button 'Daueraufträge'. Dort kannst du festlegen, dass z.B. jeden Sonntag automatisch 5€ gebucht werden.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Wie funktionieren Sparziele?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Kinder können in ihrem Bereich eigene Sparziele anlegen. Das Kind entscheidet selbst, ob es manuell Geld dorthin verschiebt oder per Dauerauftrag darauf spart. Du als Elternteil siehst den Fortschritt jederzeit im Dashboard.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Der Wunschzettel</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Sobald das Guthaben auf dem Taschengeldkonto für einen Wunsch ausreicht, erscheint ein grüner Badge 'Geld reicht!'. Du kannst dann bei dir eine Notiz (z.B. 'Besorgt Oma') hinzufügen.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Was sind Zukunftskonten (Rücklagen)?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Zukunftskonten sind virtuelle Notizzettel für dich als Elternteil. Du kannst hier Geld festhalten, das du auf verschiedenen echten Bankkonten, in ETFs, im Sparschwein oder bei Oma für das Kind zurücklegst. So vergisst du nie, wo sich wie viel Geld für die Zukunft (z.B. Führerschein) befindet.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Warum sind diese Konten 'geheim'?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Diese Konten sind standardmäßig in der App für das Kind unsichtbar. Das ist Absicht, damit das Kind dieses (oft große) Ersparte nicht mit seinem frei verfügbaren Taschengeld verwechselt.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Prognose-Graphen & Rendite</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Du kannst für ein Zukunftskonto eine erwartete Rendite (Zinsen) eintragen. Die App berechnet dann in einem Graphen, wie sich das Geld über die Jahre entwickeln könnte. Wichtig: Da Treazo nicht mit echten Banken verknüpft ist, ist dies nur eine theoretische Schätzung zur Veranschaulichung!</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Monatliche Sparraten</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Du kannst bei einem Zukunftskonto eintragen, wie viel Geld du dort jeden Monat (z.B. in einen ETF) einzahlst. Die App rechnet diese Sparrate dann automatisch in die Prognose-Graphen für die zukünftigen Jahre mit ein.</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Kann ich das Taschengeld vorziehen?</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Ja, du kannst deinem Kind einen Vorschuss auf das nächste Taschengeld geben. Die App verrechnet Vorschüsse dann ganz automatisch und transparent nach 7 Tagen mit dem Taschengeldkonto (falls du sie nicht manuell vorher abziehst).</p>
+              </div>
+            </details>
+
+            <details class="faq-item group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 open:border-[#2DBED2] open:shadow-md">
+              <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-slate-900 outline-none">
+                <span class="faq-question">Taschengeld vorziehen & Rückzahlung</span>
+                <span class="ml-4 flex-shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#2DBED2]"><i data-lucide="chevron-down" class="h-5 w-5"></i></span>
+              </summary>
+              <div class="mt-4 border-t border-slate-100 pt-4 faq-answer text-slate-600">
+                <p>Wenn ein größerer Wunsch ansteht, kannst du auch einen größeren Betrag vorziehen und eine automatische Raten-Rückzahlung festlegen. Diese Rate wird dann regelmäßig vom zukünftigen Taschengeldkonto einbehalten. So lernen Kinder früh, sich ihr Budget besser einzuteilen und nicht alles auf einmal auszugeben.</p>
+              </div>
+            </details>
+
+            <!-- Platzhalter für Nachricht, wenn nichts gefunden wird -->
+            <div id="faq-empty-state" class="hidden text-center py-8 text-slate-500">
+              Keine passenden Fragen gefunden. Schreib uns gerne über das Kontaktformular!
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- KONTAKT SECTION -->
+      <section id="kontakt" class="mx-auto max-w-7xl px-6 py-16 sm:px-8">
+        <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[#2DBED2]">Kontakt & Tester-Club</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Werde Mitglied im exklusiven Tester-Club</h2>
+            <p class="mt-4 max-w-xl text-base leading-8 text-slate-600">
+              Sichere dir als einer der ersten Nutzer vollen Zugriff auf Treazo. Trage dich ein und wir melden uns zeitnah mit allen Informationen und deinem Testzugang.
+            </p>
+          </div>
+          
+          <!-- HIER DEINE ID EINTRAGEN -->
+          <form class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm" action="https://formspree.io/f/mbdbdvll" method="POST">
+            
+            <div class="grid gap-5">
+              <label class="block">
+                <span class="text-sm font-semibold text-slate-900">Name</span>
+                <input
+                  type="text"
+                  name="Name"
+                  required
+                  class="mt-3 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-[#2DBED2] focus:ring-2 focus:ring-[#2DBED2]/20"
+                  placeholder="Dein Name"
+                />
+              </label>
+              <label class="block">
+                <span class="text-sm font-semibold text-slate-900">E-Mail</span>
+                <input
+                  type="email"
+                  name="Email"
+                  required
+                  class="mt-3 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-[#2DBED2] focus:ring-2 focus:ring-[#2DBED2]/20"
+                  placeholder="deine@email.de"
+                />
+              </label>
+              <label class="block">
+                <span class="text-sm font-semibold text-slate-900">Nachricht (Optional)</span>
+                <textarea
+                  name="Nachricht"
+                  rows="4"
+                  class="mt-3 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-[#2DBED2] focus:ring-2 focus:ring-[#2DBED2]/20"
+                  placeholder="Hast du Fragen an mich oder zur App?"
+                ></textarea>
+              </label>
+              
+              <label class="flex items-start gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 cursor-pointer hover:bg-slate-100 transition-colors">
+                <input type="checkbox" name="Tester-Club_Bewerbung" value="Ja" class="mt-1 h-5 w-5 rounded border-slate-300 text-[#FAC828] focus:ring-[#FAC828]/60" />
+                <span class="text-sm text-slate-700">
+                  Ja, ich bewerbe mich für den exklusiven Tester-Club und sichere mir damit 1 Jahr kostenfreie Mitgliedschaft.
+                </span>
+              </label>
+
+              <!-- Verbesserter Datenschutzhinweis -->
+              <label class="flex items-start gap-3 mt-1">
+                <input type="checkbox" required class="mt-1 h-5 w-5 rounded border-slate-300 text-[#2DBED2] focus:ring-[#2DBED2]/60" />
+                <span class="text-xs text-slate-500 leading-relaxed">
+                  Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert und verarbeitet werden. Du kannst deine Einwilligung jederzeit per E-Mail widerrufen. Weitere Informationen findest du in der <a href="https://hijonyamuk-hash.github.io/treazo-legal/support.html" target="_blank" class="underline hover:text-slate-800">Datenschutzerklärung</a>. *
+                </span>
+              </label>
+
+              <button
+                type="submit"
+                class="inline-flex w-full items-center justify-center rounded-full bg-[#FAC828] px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-[#e0b323] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAC828]/40 mt-4"
+              >
+                Jetzt beitreten & Nachricht senden
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white px-6 py-8 sm:px-8">
+      <div class="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+        <p>© 2026 Treazo. Alle Rechte vorbehalten.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="https://hijonyamuk-hash.github.io/treazo-legal/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition-colors">Impressum</a>
+          <a href="https://hijonyamuk-hash.github.io/treazo-legal/support.html" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition-colors">Datenschutz & Support</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Aktiviert die Lucide-Icons
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      // Live-Suche für die FAQs
+      const searchInput = document.getElementById('faq-search');
+      const faqItems = document.querySelectorAll('.faq-item');
+      const emptyState = document.getElementById('faq-empty-state');
+
+      if(searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const searchTerm = e.target.value.toLowerCase();
+          let hasVisibleItems = false;
+
+          faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+
+            // Prüfen ob Suchbegriff in Frage oder Antwort vorkommt
+            if(question.includes(searchTerm) || answer.includes(searchTerm)) {
+              item.style.display = 'block';
+              hasVisibleItems = true;
+            } else {
+              item.style.display = 'none';
+            }
+          });
+
+          // Zeige Nachricht, wenn nichts gefunden wurde
+          if(hasVisibleItems) {
+            emptyState.classList.add('hidden');
+          } else {
+            emptyState.classList.remove('hidden');
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
